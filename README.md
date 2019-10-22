@@ -1,7 +1,7 @@
 # docker-compose-duplicati-haproxy-conf
 Deploy duplicati with haproxy as proxy in a doker container using docker-compose.
 
-Clone project, copy default.env to.env and edit.
+Clone project, copy "default.env" to ".env" and modify.
 
 Start with "docker-compose up -d".
 
@@ -11,4 +11,4 @@ Restart haproxy with "docker-compose start haproxy".
 
 Stop and remove with "docker-compose down".
 
-I have bwdata and duplicati folders added in docker-compose.yml so duplicati can see them for backup, bwdata is used by Bitwarden.
+I have bwdata and duplicati folders added in docker-compose.yml so duplicati can see them for backup, bwdata is used by Bitwarden https://help.bitwarden.com/hosting/.
