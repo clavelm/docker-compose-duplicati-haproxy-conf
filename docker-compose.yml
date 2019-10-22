@@ -30,6 +30,7 @@ services:
             - 8200:${HAPROXY_PORT}
     depends_on:
             - duplicati
+    restart: unless-stopped
 volumes:
     config:
     backups:
