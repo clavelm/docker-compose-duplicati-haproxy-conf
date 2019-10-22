@@ -1,0 +1,37 @@
+version: '3.5'
+services:
+  duplicati:
+    image: linuxserver/duplicati
+    container_name: duplicati
+    environment:
+            - PUID=$PUID
+            - PGID=$PGID
+    volumes:
+            - config:/config
+            - backups:/backups
+            - source:/source
+            - ~/bwdata:/bwdata:ro
+            - ~/duplicati:/duplicati:ro
+    restart: unless-stopped
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    environment:
+            - PUID=$PUID
+            - PGID=$PGID
+            - DUPLICATI_HOST=duplicati
+            - DUPLICATI_PORT=$DUPLICATI_PORT
+            - HAPROXY_PORT=$HAPROXY_PORT
+            - HAPROXY_SSL_KEY_PATH=/usr/local/etc/haproxy/$SSL_CERT_NAME
+    volumes:
+            - ./haproxy:/usr/local/etc/haproxy:ro
+            - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+            - 8200:${HAPROXY_PORT}
+    depends_on:
+            - duplicati
+volumes:
+    config:
+    backups:
+    source:
+
