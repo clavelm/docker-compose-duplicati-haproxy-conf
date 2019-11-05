@@ -15,19 +15,18 @@ services:
     restart: unless-stopped
   haproxy:
     image: haproxy:latest
-    container_name: haproxy
     environment:
             - PUID=$PUID
             - PGID=$PGID
-            - DUPLICATI_HOST=duplicati
-            - DUPLICATI_PORT=$DUPLICATI_PORT
+            - APP_HOST=duplicati
+            - APP_PORT=$APP_PORT
             - HAPROXY_PORT=$HAPROXY_PORT
             - HAPROXY_SSL_KEY_PATH=/usr/local/etc/haproxy/$SSL_CERT_NAME
     volumes:
             - ./haproxy:/usr/local/etc/haproxy:ro
             - /var/run/docker.sock:/var/run/docker.sock
     ports:
-            - 8200:${HAPROXY_PORT}
+            - $APP_PORT:$HAPROXY_PORT
     depends_on:
             - duplicati
     restart: unless-stopped
