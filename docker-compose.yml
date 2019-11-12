@@ -1,8 +1,7 @@
 version: '3.5'
 services:
-  duplicati:
+  app:
     image: linuxserver/duplicati
-    container_name: duplicati
     environment:
             - PUID=$PUID
             - PGID=$PGID
@@ -18,7 +17,7 @@ services:
     environment:
             - PUID=$PUID
             - PGID=$PGID
-            - APP_HOST=duplicati
+            - APP_HOST=app
             - APP_PORT=$APP_PORT
             - HAPROXY_PORT=$HAPROXY_PORT
             - HAPROXY_SSL_KEY_PATH=/usr/local/etc/haproxy/$SSL_CERT_NAME
@@ -26,9 +25,9 @@ services:
             - ./haproxy:/usr/local/etc/haproxy:ro
             - /var/run/docker.sock:/var/run/docker.sock
     ports:
-            - $APP_PORT:$HAPROXY_PORT
+            - $OUT_PORT:$HAPROXY_PORT
     depends_on:
-            - duplicati
+            - app
     restart: unless-stopped
 volumes:
     config:
