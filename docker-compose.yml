@@ -9,10 +9,7 @@ services:
             - config:/config
             - backups:/backups
             - source:/source
-            - ~/bwdata:/bwdata:ro
-            - ~/duplicati:/duplicati:ro
-            - ~/couchpotato:/couchpotato:ro
-            - ~/sickchill:/sickchill:ro
+            - ./backup/home:/backup/home:ro
     restart: unless-stopped
   haproxy:
     image: haproxy:latest
