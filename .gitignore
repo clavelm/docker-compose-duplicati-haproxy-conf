@@ -2,3 +2,6 @@
 haproxy/cert.pem
 create-cert.sh
 
+.gitsecret/keys/random_seed
+.gitsecret/keys/pubring.kbx~
+!*.secret
